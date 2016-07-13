@@ -23,6 +23,8 @@ public class AddXandTAxis : MonoBehaviour {
     public float angleOfBestPlaceToInsert; // Stores the angle of the line after which the newest line will be inserted
     public Text issueText;
 
+    private GameObject sl1;
+    private GameObject sl2;
     private RotatorAddNRemove ranr;
     private bool timeWaited = false;
 
@@ -48,8 +50,8 @@ public class AddXandTAxis : MonoBehaviour {
     // Draws the signal lines, adds them to the list and sets their parents
     void DrawSignalLines()
     {
-        GameObject sl1 = Instantiate(signalLine, Vector3.zero, Quaternion.Euler(0, 0, 45)) as GameObject;
-        GameObject sl2 = Instantiate(signalLine, Vector3.zero, Quaternion.Euler(0, 0, 135)) as GameObject;
+        sl1 = Instantiate(signalLine, Vector3.zero, Quaternion.Euler(0, 0, 45)) as GameObject;
+        sl2 = Instantiate(signalLine, Vector3.zero, Quaternion.Euler(0, 0, 135)) as GameObject;
         linesT.Add(sl1);
         linesT.Add(sl2);
         sl1.transform.parent = signalLineParent.transform;
@@ -95,17 +97,45 @@ public class AddXandTAxis : MonoBehaviour {
     {
         if (ranr.inEditorMode == false)
         {
+            linesT = linesT.OrderBy(temp => temp.transform.eulerAngles.z).ToList<GameObject>(); // Sorts the list depending on the z angle of the line
             LineCheck();
             linesT = linesT.OrderBy(temp => temp.transform.eulerAngles.z).ToList<GameObject>(); // Sorts the list depending on the z angle of the line
             biggestGapBetweenLines = 0; // Needs to be recalculated every time we draw a new line
         }
         else
         {
-            issueText.gameObject.SetActive(true);
-            issueText.text = "Cannot Complete The Action In The Edit Mode";
-
-            StartCoroutine(IssueTimeConfig());
+            IssueTextAction();
         }
+    }
+
+    public void ResetScreen()
+    {
+        if (ranr.inEditorMode == false)
+        {
+            // Destroy all the line GameObjects except the signal line, "parentsParent" is the parent of all the X and T axis
+            foreach (Transform child in parentsParent.transform)
+                Destroy(child.gameObject);
+
+            // Clear the lists containing the information about the lines
+            linesT.Clear(); 
+            linesX.Clear();
+
+            // Add the signal lines to the list
+            linesT.Add(sl1); 
+            linesT.Add(sl2);
+        }
+        else
+        {
+            IssueTextAction(); // If in the editor mode, display an issue to the screen
+        }
+    }
+
+    void IssueTextAction()
+    {
+        issueText.gameObject.SetActive(true);
+        issueText.text = "Cannot Complete The Action In The Edit Mode";
+
+        StartCoroutine(IssueTimeConfig());
     }
 
     IEnumerator IssueTimeConfig()
