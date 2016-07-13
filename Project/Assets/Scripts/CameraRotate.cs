@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CameraRotate : MonoBehaviour {
 
-    public Toggle canRotateToggle;
+    public Toggle canRotateToggle; 
 
 	void Start ()
     {
@@ -13,6 +13,8 @@ public class CameraRotate : MonoBehaviour {
 	
 	void Update ()
     {
+        // If the toggle is on, rotate the camera to the degree of the Aceelerometer angle
+        //      It is hardcoded, to be improved later ...
         if (canRotateToggle.isOn)
         {
             transform.rotation = Quaternion.Euler(0, 0, -Input.acceleration.x * 45);

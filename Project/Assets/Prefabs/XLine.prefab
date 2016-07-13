@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 460016}
   - 212: {fileID: 21247270}
   m_Layer: 0
-  m_Name: NormalLine
+  m_Name: XLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

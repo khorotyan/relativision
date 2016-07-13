@@ -5,18 +5,18 @@ using System.Collections.Generic;
 
 public class RotatorAddNRemove : MonoBehaviour {
 
-    public Camera cam;
-    public GameObject rotator;
-    public AddXandTAxis xt;
+    public Camera cam; // Reference to the camera
+    public GameObject rotator; // Reference to the rotator object
+    public AddXandTAxis xt; 
 
-    public float rotatorRatio = 2 / 3;
+    public float rotatorRatio = 2 / 3; // The ratio of the rotator object that will be placed on the lines on the edit mode
 
     [HideInInspector]
     public bool inEditorMode = false;
 
-    [SerializeField]
-    private List<GameObject> linesT;
-    public void GetListT()
+    [SerializeField] // Make the variables visible in the inspector
+    private List<GameObject> linesT; // Stores the objects of the Taxis in the list
+    public void GetListT() // Gets the T axis from the AddXandTAxis class
     {
         linesT = xt.GetListT();
     }
@@ -49,16 +49,17 @@ public class RotatorAddNRemove : MonoBehaviour {
         if (inEditorMode == true)
         {
             CanEdit();
-            cam.backgroundColor = new Color32(255, 200, 200, 0);
+            cam.backgroundColor = new Color32(255, 200, 200, 0); // set editor color to red
         }
         else
         {
-            CantEdit();
-            cam.backgroundColor = new Color32(255, 255, 255, 0);
+            CannotEdit();
+            cam.backgroundColor = new Color32(255, 255, 255, 0); // set editor color to white
         }
     }
 
-    // Add rotator objects to the lines as a child 
+    // Add rotator objects to the lines as a child whenever we get to the edit mode and draw them 
+    //      
     void CanEdit()
     {
         GetListT();
@@ -66,32 +67,38 @@ public class RotatorAddNRemove : MonoBehaviour {
 
         if (linesT.Count != 0 && linesX.Count != 0)
         {
+            // Draw a Rotator Icon on the T axis
+
+            // The loop starts from 1 to linesT.Count - 1 because the list contains not only the T lines but also the signal lines
+            //      Note that the lists are sorted everytime we draw a new line
             for (int i = 1; i < linesT.Count - 1; i++)
             {
-                // For T coordinates
                 rendT = linesT[i].GetComponent<Renderer>();
 
                 float xCoord;
                 if (linesT[i].transform.eulerAngles.z >= 90)
-                    xCoord = rendT.bounds.min.x;
+                    xCoord = rendT.bounds.min.x; // Returns the minimum x coordinate of the line (the boundary of the line)
                 else
-                    xCoord = rendT.bounds.max.x;
+                    xCoord = rendT.bounds.max.x; // Returns the maximum x coordinate of the line
 
                 Vector3 tempPosT = new Vector3(xCoord * rotatorRatio, rendT.bounds.max.y * rotatorRatio, rotator.transform.position.z);
 
-                Quaternion tempRotT = Quaternion.Euler(0f, 0f, linesT[i].transform.eulerAngles.z);
+                Quaternion tempRotT = Quaternion.Euler(0f, 0f, linesT[i].transform.eulerAngles.z); // Rotations are in degrees 
+
+                // Draw the line with tempPosT coordinates (where tempPosT is the position of the center of the line)
+                //      and tempRotT rotation 
                 GameObject tempObjectT = Instantiate(rotator, tempPosT, tempRotT) as GameObject;
                 tempObjectT.transform.parent = linesT[i].transform;
             }
 
+            // Draw a Rotator Icon on the X axis
             for (int i = 0; i < linesX.Count; i++)
-            {
-                // For X coordinates
+            {   
                 rendX = linesX[i].GetComponent<Renderer>();
 
                 float yCoord;
                 if (linesX[i].transform.eulerAngles.z >= 0 && linesX[i].transform.eulerAngles.z <= 45)
-                    yCoord = rendX.bounds.max.y;
+                    yCoord = rendX.bounds.max.y; 
                 else
                     yCoord = rendX.bounds.min.y;
 
@@ -104,8 +111,8 @@ public class RotatorAddNRemove : MonoBehaviour {
         }
     }
 
-    // Destroy the rotator objects from the lines
-    void CantEdit()
+    // Destroy the rotator objects from the lines whenever we exit the Edit Mode
+    void CannotEdit()
     {
         GetListT();
         GetListX();
