@@ -23,17 +23,14 @@ public class AddXandTAxis : MonoBehaviour {
     public float angleOfBestPlaceToInsert; // Stores the angle of the line after which the newest line will be inserted
     public Text issueText;
 
-    private GameObject sl1;
-    private GameObject sl2;
-    private RotatorAddNRemove ranr;
+    public GameObject sl1;
+    public GameObject sl2;
     private bool timeWaited = false;
 
     void Awake ()
     {
         linesT = new List<GameObject>();
         linesX = new List<GameObject>();
-
-        ranr = GetComponent<RotatorAddNRemove>();
 
         DrawSignalLines();
     }
@@ -95,7 +92,7 @@ public class AddXandTAxis : MonoBehaviour {
 
     public void AddLine()
     {
-        if (ranr.inEditorMode == false)
+        if (RotatorAddNRemove.inEditorMode == false)
         {
             linesT = linesT.OrderBy(temp => temp.transform.eulerAngles.z).ToList<GameObject>(); // Sorts the list depending on the z angle of the line
             LineCheck();
@@ -105,28 +102,6 @@ public class AddXandTAxis : MonoBehaviour {
         else
         {
             IssueTextAction();
-        }
-    }
-
-    public void ResetScreen()
-    {
-        if (ranr.inEditorMode == false)
-        {
-            // Destroy all the line GameObjects except the signal line, "parentsParent" is the parent of all the X and T axis
-            foreach (Transform child in parentsParent.transform)
-                Destroy(child.gameObject);
-
-            // Clear the lists containing the information about the lines
-            linesT.Clear(); 
-            linesX.Clear();
-
-            // Add the signal lines to the list
-            linesT.Add(sl1); 
-            linesT.Add(sl2);
-        }
-        else
-        {
-            IssueTextAction(); // If in the editor mode, display an issue to the screen
         }
     }
 

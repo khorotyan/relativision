@@ -2,17 +2,20 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class RotatorAddNRemove : MonoBehaviour {
 
     public Camera cam; // Reference to the camera
     public GameObject rotator; // Reference to the rotator object
-    public AddXandTAxis xt; 
+    public AddXandTAxis xt;
+    [Space(5)]
+    public Button editButton;
 
-    public float rotatorRatio = 2 / 3; // The ratio of the rotator object that will be placed on the lines on the edit mode
+    public float rotatorRatio = 2f / 3; // The ratio of the rotator object that will be placed on the lines on the edit mode
 
     [HideInInspector]
-    public bool inEditorMode = false;
+    public static bool inEditorMode = false;
 
     [SerializeField] // Make the variables visible in the inspector
     private List<GameObject> linesT; // Stores the objects of the Taxis in the list
@@ -29,9 +32,12 @@ public class RotatorAddNRemove : MonoBehaviour {
 
     private Renderer rendT;
     private Renderer rendX;
+    private Color32 defAddEventButtonCol;
 
     void Start ()
     {
+        defAddEventButtonCol = editButton.image.color;
+
         GetListT();
         GetListX();
 	}
@@ -42,19 +48,21 @@ public class RotatorAddNRemove : MonoBehaviour {
 	}
 
     // Get the rotation of the lines and instantiate the rotator at a specific point
-    public void OnEditButtonClick()
+    public void OnRotatorEditClick()
     {
         inEditorMode = !inEditorMode;
 
         if (inEditorMode == true)
         {
             CanEdit();
-            cam.backgroundColor = new Color32(255, 200, 200, 0); // set editor color to red
+            cam.backgroundColor = new Color32(255, 200, 200, 255); // set editor color
+            editButton.image.color = new Color32(255, 200, 200, 255); // set button color
         }
         else
         {
             CannotEdit();
-            cam.backgroundColor = new Color32(255, 255, 255, 0); // set editor color to white
+            cam.backgroundColor = defAddEventButtonCol; // set editor color back to its original color
+            editButton.image.color = defAddEventButtonCol; // set button color back to its original color
         }
     }
 

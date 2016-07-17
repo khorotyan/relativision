@@ -63,8 +63,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AddAnEvent.cs" />
     <Compile Include="Assets\Scripts\AddXandTAxis.cs" />
     <Compile Include="Assets\Scripts\CameraRotate.cs" />
+    <Compile Include="Assets\Scripts\EventEdit.cs" />
+    <Compile Include="Assets\Scripts\EventParallelConfig.cs" />
+    <Compile Include="Assets\Scripts\ResetScreen.cs" />
     <Compile Include="Assets\Scripts\RotateLine.cs" />
     <Compile Include="Assets\Scripts\RotatorAddNRemove.cs" />
     <Compile Include="Assets\Scripts\UIConfig.cs" />
