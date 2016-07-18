@@ -6,6 +6,7 @@ public class AddAnEvent : MonoBehaviour {
 
     public GameObject eventObject;
     public GameObject eventParent;
+    public ScaleObjects so;
     public AddXandTAxis xt;
     [SerializeField]
     public List<GameObject> events; // Stores GameObjects of the events
@@ -74,11 +75,13 @@ public class AddAnEvent : MonoBehaviour {
             {
                 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Returns the world point of the mouse
 
-                GameObject tempEvent = Instantiate(eventObject, mousePos, Quaternion.identity) as GameObject; // Spawn the event
+                GameObject tempEvent = Instantiate(eventObject, new Vector3(mousePos.x, mousePos.y, -0.05f), Quaternion.identity) as GameObject; // Spawn the event
                 events.Add(tempEvent); 
                 tempEvent.transform.parent = eventParent.transform; // Sets the parent of the event
 
                 mouseDown = false;
+
+                so.BackgroundScaleConfig();
             } 
         }
     }

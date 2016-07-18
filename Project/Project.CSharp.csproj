@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\ResetScreen.cs" />
     <Compile Include="Assets\Scripts\RotateLine.cs" />
     <Compile Include="Assets\Scripts\RotatorAddNRemove.cs" />
+    <Compile Include="Assets\Scripts\ScaleObjects.cs" />
     <Compile Include="Assets\Scripts\UIConfig.cs" />
     <Compile Include="Assets\Scripts\ZoomConfig.cs" />
   </ItemGroup>

@@ -12,8 +12,8 @@ GameObject:
   - 114: {fileID: 11442806}
   - 114: {fileID: 11410904}
   - 114: {fileID: 11444480}
-  - 114: {fileID: 11432238}
   - 114: {fileID: 11466678}
+  - 114: {fileID: 11432238}
   - 114: {fileID: 11413854}
   - 114: {fileID: 11408286}
   m_Layer: 0
@@ -23,6 +23,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &162874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 411502}
+  - 114: {fileID: 11489442}
+  m_Layer: 0
+  m_Name: BackgroundScale
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &411502
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162874}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 485016}
+  m_RootOrder: 0
 --- !u!4 &485016
 Transform:
   m_ObjectHideFlags: 1
@@ -33,7 +62,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 411502}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!114 &11408286
@@ -47,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 496b869cd3ffd33449b1091770c620df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parallelsParent: {fileID: 0}
   xParallel: {fileID: 197702, guid: 37f8375f85e551c41ab6c29c19dff94a, type: 2}
   tParallel: {fileID: 197702, guid: bdf05067eab585048aba2639b29d462a, type: 2}
   xt: {fileID: 11442806}
@@ -84,6 +115,7 @@ MonoBehaviour:
   aae: {fileID: 11432238}
   txHolder: {fileID: 0}
   eventParent: {fileID: 0}
+  parallelsParent: {fileID: 0}
   issueText: {fileID: 0}
 --- !u!114 &11432238
 MonoBehaviour:
@@ -99,9 +131,9 @@ MonoBehaviour:
   eventObject: {fileID: 183486, guid: 71af81b5408a93746b54e5cfe163a5e1, type: 2}
   eventParent: {fileID: 0}
   xt: {fileID: 11442806}
+  events: []
   addEventButton: {fileID: 0}
   positionRatio: 0.6666667
-  linesT: []
 --- !u!114 &11442806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,6 +193,21 @@ MonoBehaviour:
   moveIcon: {fileID: 143754, guid: f79a85e7bb7115244aedfa34b525ad30, type: 2}
   issueText: {fileID: 0}
   aae: {fileID: 11432238}
+--- !u!114 &11489442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e968c494abbc942ba30f60ad498939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xt: {fileID: 11442806}
+  aae: {fileID: 11432238}
+  backgroundImage: {fileID: 0}
+  lines: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

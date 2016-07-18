@@ -9,6 +9,7 @@ public class RotatorAddNRemove : MonoBehaviour {
     public Camera cam; // Reference to the camera
     public GameObject rotator; // Reference to the rotator object
     public AddXandTAxis xt;
+    public ScaleObjects so;
     [Space(5)]
     public Button editButton;
 
@@ -97,6 +98,7 @@ public class RotatorAddNRemove : MonoBehaviour {
                 //      and tempRotT rotation 
                 GameObject tempObjectT = Instantiate(rotator, tempPosT, tempRotT) as GameObject;
                 tempObjectT.transform.parent = linesT[i].transform;
+                tempObjectT.transform.localScale = new Vector3(1f / linesT[i].transform.localScale.x * cam.orthographicSize / 5f, 1f / linesT[i].transform.localScale.y * cam.orthographicSize / 5f, 0);
             }
 
             // Draw a Rotator Icon on the X axis
@@ -113,8 +115,10 @@ public class RotatorAddNRemove : MonoBehaviour {
                 Vector3 tempPosX = new Vector3(rendX.bounds.max.x * rotatorRatio, yCoord * rotatorRatio, rotator.transform.position.z);
 
                 Quaternion tempRotX = Quaternion.Euler(0f, 0f, linesX[i].transform.eulerAngles.z);
+
                 GameObject tempObjectX = Instantiate(rotator, tempPosX, tempRotX) as GameObject;
                 tempObjectX.transform.parent = linesX[i].transform;
+                tempObjectX.transform.localScale = new Vector3(1f / linesX[i].transform.localScale.x * cam.orthographicSize / 5f, 1f / linesX[i].transform.localScale.y * cam.orthographicSize / 5f, 0);
             }
         }
     }

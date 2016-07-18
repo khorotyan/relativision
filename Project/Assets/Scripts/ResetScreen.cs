@@ -5,6 +5,7 @@ using System.Collections;
 
 public class ResetScreen : MonoBehaviour {
 
+    public ScaleObjects so;
     public AddXandTAxis xt;
     public AddAnEvent aae;
     public GameObject txHolder;
@@ -83,6 +84,9 @@ public class ResetScreen : MonoBehaviour {
             // Add the signal lines to the list
             linesT.Add(sl1);
             linesT.Add(sl2);
+
+            // Configure all the rotations
+            so.BackgroundScaleConfig(); 
         }
         else
         {

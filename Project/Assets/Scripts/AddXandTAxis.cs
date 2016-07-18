@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class AddXandTAxis : MonoBehaviour {
 
+    #region variables
+    public ScaleObjects so;
     public GameObject signalLine; 
     public GameObject signalLineParent;
     [Space(5)]
@@ -23,9 +25,12 @@ public class AddXandTAxis : MonoBehaviour {
     public float angleOfBestPlaceToInsert; // Stores the angle of the line after which the newest line will be inserted
     public Text issueText;
 
+    [HideInInspector]
     public GameObject sl1;
+    [HideInInspector]
     public GameObject sl2;
     private bool timeWaited = false;
+    #endregion
 
     void Awake ()
     {
@@ -87,6 +92,8 @@ public class AddXandTAxis : MonoBehaviour {
             tempXaxis.transform.parent = txParent.transform;
 
             txParent.transform.parent = parentsParent.transform;
+
+            so.BackgroundScaleConfig();
         }
     }
 
@@ -109,7 +116,7 @@ public class AddXandTAxis : MonoBehaviour {
     {
         issueText.gameObject.SetActive(true);
         issueText.text = "Cannot Complete The Action In The Edit Mode";
-
+    
         StartCoroutine(IssueTimeConfig());
     }
 

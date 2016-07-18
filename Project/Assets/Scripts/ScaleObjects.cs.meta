@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 15e968c494abbc942ba30f60ad498939
+timeCreated: 1468822563
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - xt: {instanceID: 0}
+  - aae: {instanceID: 0}
+  - backgroundImage: {instanceID: 0}
+  - moveIcon: {fileID: 143754, guid: f79a85e7bb7115244aedfa34b525ad30, type: 2}
+  - rotateIcon: {fileID: 166530, guid: 5a183560d5370034ba90c22328e38a45, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -72,8 +72,9 @@ public class EventEdit : MonoBehaviour {
         {
             for (int i = 0; i < events.Count; i++)
             {
-                GameObject tempEventMover = Instantiate(moveIcon, events[i].transform.position, Quaternion.identity) as GameObject;
+                GameObject tempEventMover = Instantiate(moveIcon, events[i].transform.position, Quaternion.identity) as GameObject;       
                 tempEventMover.transform.parent = events[i].transform;
+                tempEventMover.transform.localScale = new Vector3(1f, 1f, 0);
             }
         }
     }
@@ -108,7 +109,7 @@ public class EventEdit : MonoBehaviour {
     void MoveEvent()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+    
         hitCollider.transform.parent.position = mousePos;
     }
 

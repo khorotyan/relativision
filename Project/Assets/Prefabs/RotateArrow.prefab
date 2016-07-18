@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 433948}
   - 212: {fileID: 21210212}
   - 61: {fileID: 6186148}
-  - 114: {fileID: 11463394}
   m_Layer: 0
   m_Name: RotateArrow
   m_TagString: Rotator
@@ -25,8 +24,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.66, y: 1.94, z: -0.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,17 +44,6 @@ BoxCollider2D:
   m_Offset: {x: -0.0016512871, y: -0.0016512871}
   serializedVersion: 2
   m_Size: {x: 0.34356833, y: 0.48592854}
---- !u!114 &11463394
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 166530}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8329d6c0c78d08540ac32d926f1409c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &21210212
 SpriteRenderer:
   m_ObjectHideFlags: 1
