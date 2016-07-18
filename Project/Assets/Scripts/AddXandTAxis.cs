@@ -12,14 +12,21 @@ public class AddXandTAxis : MonoBehaviour {
     public GameObject signalLine; 
     public GameObject signalLineParent;
     [Space(5)]
-    public GameObject lineTObj;
-    public GameObject lineXObj;
-    public GameObject parentsParent;
-    public static List<GameObject> linesT; // Stores GameObjects of the T lines also the signal lines
-    
-    public static List<GameObject> linesX;
-
-    [Space(5)] // Make a space between the public data types in the inspector
+    public GameObject axisTandX;
+    public GameObject tAxisParent;
+    public GameObject xAxisParent;
+    public List<GameObject> linesT;
+    public List<GameObject> GetListT()
+    {
+        return linesT;
+    }
+    public List<GameObject> linesX;
+    public List<GameObject> GetListX()
+    {
+        return linesX;
+    }
+    public int numberOfAddedLines = 0;
+    [Space(5)]
     public int bestPlaceToInsert; // Determines the position of the list after which the new T axis will be added;
     public float biggestGapBetweenLines = 0; // Stores the biggest gap between the T axis
     public float angleOfBestPlaceToInsert; // Stores the angle of the line after which the newest line will be inserted
@@ -42,7 +49,7 @@ public class AddXandTAxis : MonoBehaviour {
 	
 	void Update ()
     {
-        if (timeWaited == true) // If we waited enough, disappear the issue text
+        if (timeWaited == true) // If we waitedenough, disappear the issue text
         {
             issueText.gameObject.SetActive(false);
             timeWaited = false;
@@ -61,12 +68,11 @@ public class AddXandTAxis : MonoBehaviour {
     }
 
     // Decides where to place the new T axis based on the previously placed lines
-    //      and calculates where to place the X axis
+    //  and calculates where to place the X axis
     void LineCheck()
     {
         if (linesT.Count != 0 || linesT != null)
         {
-            // Calculates the gap between consequtive lines to see where the best place is to draw a new line
             for (int i = linesT.Count - 1; i > 0; i--)
             {
                 if (linesT[i].transform.eulerAngles.z - linesT[i - 1].transform.eulerAngles.z > biggestGapBetweenLines)
@@ -76,24 +82,21 @@ public class AddXandTAxis : MonoBehaviour {
                     bestPlaceToInsert = i;
                 }
             }
-            
-            GameObject txParent = new GameObject(); // Make a GameObject that will contain its T and X axis
-            txParent.name = "txParent";
 
-            float zRotForT = angleOfBestPlaceToInsert + biggestGapBetweenLines / 2; // Draws the line in between the lines
-            // Spawn a line whose center is the zero Vector, the GameObject is lineTObj, with rotation zRotForT around the z axis
-            GameObject tempTaxis = Instantiate(lineTObj, Vector3.zero, Quaternion.Euler(0, 0, zRotForT)) as GameObject; 
+            float zRotForT = angleOfBestPlaceToInsert + biggestGapBetweenLines / 2;
+            GameObject tempTaxis = Instantiate(axisTandX, Vector3.zero, Quaternion.Euler(0, 0, zRotForT)) as GameObject;
             linesT.Add(tempTaxis);
-            tempTaxis.transform.parent = txParent.transform;
+            tempTaxis.transform.parent = tAxisParent.transform;
 
-            float zRotForX = 90 - zRotForT; // Contains the Z rotation of the X axis
-            GameObject tempXaxis = Instantiate(lineXObj, Vector3.zero, Quaternion.Euler(0, 0, zRotForX)) as GameObject;
+            float zRotForX = 90 - zRotForT;
+            GameObject tempXaxis = Instantiate(axisTandX, Vector3.zero, Quaternion.Euler(0, 0, zRotForX)) as GameObject;
             linesX.Add(tempXaxis);
             tempXaxis.transform.parent = txParent.transform;
 
             txParent.transform.parent = parentsParent.transform;
 
             so.BackgroundScaleConfig();
+            tempXaxis.transform.parent = xAxisParent.transform;
         }
     }
 
@@ -104,11 +107,16 @@ public class AddXandTAxis : MonoBehaviour {
             linesT = linesT.OrderBy(temp => temp.transform.eulerAngles.z).ToList<GameObject>(); // Sorts the list depending on the z angle of the line
             LineCheck();
             linesT = linesT.OrderBy(temp => temp.transform.eulerAngles.z).ToList<GameObject>(); // Sorts the list depending on the z angle of the line
+            numberOfAddedLines++;
             biggestGapBetweenLines = 0; // Needs to be recalculated every time we draw a new line
         }
         else
         {
             IssueTextAction();
+            issueText.gameObject.SetActive(true);
+            issueText.text = "Cannot Complete The Action In The Edit Mode";
+
+            StartCoroutine(IssueTimeConfig());  
         }
     }
 
@@ -121,7 +129,7 @@ public class AddXandTAxis : MonoBehaviour {
     }
 
     IEnumerator IssueTimeConfig()
-    {   // Whenever WaitForSeconds finishes, timeWaited becomes true which means that we can disable the "issueText"
+    {
         if (timeWaited == false)
         {
             yield return new WaitForSeconds(3);
@@ -130,14 +138,4 @@ public class AddXandTAxis : MonoBehaviour {
         
     }
 
-    // Returns the GameObjects to make them accessible to the other classes
-    public List<GameObject> GetListT() 
-    {
-        return linesT;
-    }
-
-    public List<GameObject> GetListX()
-    {
-        return linesX;
-    }
 }
