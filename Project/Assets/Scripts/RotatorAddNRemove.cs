@@ -37,6 +37,7 @@ public class RotatorAddNRemove : MonoBehaviour {
 
     void Start ()
     {
+        cam = Camera.main;
         defAddEventButtonCol = editButton.image.color;
 
         GetListT();
@@ -56,8 +57,8 @@ public class RotatorAddNRemove : MonoBehaviour {
         if (inEditorMode == true)
         {
             CanEdit();
-            cam.backgroundColor = new Color32(255, 200, 200, 255); // set editor color
-            editButton.image.color = new Color32(255, 200, 200, 255); // set button color
+            cam.backgroundColor = ColorController.sharedEditorColor; // set editor color
+            editButton.image.color = ColorController.sharedEditorColor; // set button color
         }
         else
         {

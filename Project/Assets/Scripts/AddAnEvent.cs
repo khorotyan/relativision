@@ -90,7 +90,7 @@ public class AddAnEvent : MonoBehaviour {
     {
         if (canAddEvents == false)
         {
-            addEventButton.image.color = new Color32(255, 200, 200, 255); // Change the image color
+            addEventButton.image.color = ColorController.sharedEditorColor; // Change the image color
 
             canAddEvents = true;
         }

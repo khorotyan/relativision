@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MoveScreen : MonoBehaviour {
+
+    public Button moveScreenButton;
 
     public float screenMoveSpeed = 1f;
 
     private Vector2 prevTouchPos;
     private Vector2 curTouchPos;
+    private Color32 defMoveScreenCol;
+    private Color32 editorModeColor;
 
     private bool canMoveTheScreen = false;
     private bool escapedFrame = false;
@@ -14,20 +19,29 @@ public class MoveScreen : MonoBehaviour {
 
 	void Start ()
     {
-	
-	}
+        defMoveScreenCol = moveScreenButton.image.color;
+        editorModeColor = ColorController.sharedEditorColor;
+    }
 	
 	void Update ()
     {
-	    if (canMoveTheScreen == true && Input.GetMouseButton(0))
-        {
+        // If we can move the screen and touched (clicked) the screen, move the it
+        if (canMoveTheScreen == true && Input.GetMouseButton(0))
+        {           
             MoveTheScreen();
         }
 
-        // If we release the mouse, reset mouse information
+        // If we release the mouse, reset the mouse information
         if (Input.GetMouseButtonUp(0))
         {
             firstTouch = true;
+        }
+
+        // If we get to the editor mode, disable drawing and the drawing mode color 
+        if (RotatorAddNRemove.inEditorMode == true && moveScreenButton.image.color == editorModeColor)
+        {
+            moveScreenButton.image.color = defMoveScreenCol;
+            canMoveTheScreen = false;
         }
 	}
 
@@ -66,6 +80,16 @@ public class MoveScreen : MonoBehaviour {
     // Enables and disables the ability to move the screen
     public void OnMoveScreen()
     {
-        canMoveTheScreen = !canMoveTheScreen;
+        if (canMoveTheScreen == false)
+        {
+            editorModeColor = ColorController.sharedEditorColor;
+            moveScreenButton.image.color = editorModeColor; // Change the image color
+            canMoveTheScreen = true;
+        }
+        else
+        {
+            moveScreenButton.image.color = defMoveScreenCol;
+            canMoveTheScreen = false;
+        }
     }
 }
