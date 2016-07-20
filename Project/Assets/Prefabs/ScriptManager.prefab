@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &108556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 401526}
+  - 114: {fileID: 11451834}
+  m_Layer: 0
+  m_Name: MoveScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &138088
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,6 +55,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &401526
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 485016}
+  m_RootOrder: 1
 --- !u!4 &411502
 Transform:
   m_ObjectHideFlags: 1
@@ -64,6 +93,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 411502}
+  - {fileID: 401526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!114 &11408286
@@ -96,6 +126,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   rotator: {fileID: 166530, guid: 5a183560d5370034ba90c22328e38a45, type: 2}
   xt: {fileID: 11442806}
+  so: {fileID: 11489442}
   editButton: {fileID: 0}
   rotatorRatio: 0.5
   linesT: []
@@ -111,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fba86e77650671439ab637e76aa645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  so: {fileID: 11489442}
   xt: {fileID: 11442806}
   aae: {fileID: 11432238}
   txHolder: {fileID: 0}
@@ -130,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventObject: {fileID: 183486, guid: 71af81b5408a93746b54e5cfe163a5e1, type: 2}
   eventParent: {fileID: 0}
+  so: {fileID: 11489442}
   xt: {fileID: 11442806}
   events: []
   addEventButton: {fileID: 0}
@@ -145,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513f02c9ffe46fa45b25a5a455c1f691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  so: {fileID: 11489442}
   signalLine: {fileID: 189208, guid: a115ded0dbed8374ebf794393454b3e5, type: 2}
   signalLineParent: {fileID: 0}
   lineTObj: {fileID: 197702, guid: 24bc3f6dfad5de04a93279edb1484e91, type: 2}
@@ -167,6 +201,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8329d6c0c78d08540ac32d926f1409c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11451834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac195791847eff04abe7bcfc1ac5c8da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenMoveSpeed: 1
 --- !u!114 &11452804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,7 +253,9 @@ MonoBehaviour:
   xt: {fileID: 11442806}
   aae: {fileID: 11432238}
   backgroundImage: {fileID: 0}
-  lines: []
+  parallels: []
+  eventMoveIcons: []
+  lineRotateIcons: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

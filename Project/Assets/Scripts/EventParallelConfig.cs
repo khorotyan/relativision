@@ -136,6 +136,10 @@ public class EventParallelConfig : MonoBehaviour {
 
                     tPar.transform.parent = txParContainer.transform;
                     xPar.transform.parent = txParContainer.transform;
+
+                    // Set the initial scales of the lines
+                    tPar.transform.localScale = new Vector3(tPar.transform.localScale.x, 0.03f * Camera.main.orthographicSize / 5, 0);
+                    xPar.transform.localScale = new Vector3(xPar.transform.localScale.x, 0.03f * Camera.main.orthographicSize / 5, 0);
                 }
             }
 

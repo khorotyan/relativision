@@ -61,6 +61,7 @@ public class ResetScreen : MonoBehaviour {
 
             Camera.main.gameObject.transform.rotation = Quaternion.identity; // Resets the rotation of the camera
             Camera.main.orthographicSize = 5; // Resets the Zoom info 
+            Camera.main.transform.position = new Vector3(0, 0, -10f); // Reset Camera Position
 
             // Destroy all the line GameObjects except the signal line, "parentsParent" is the parent of all the X and T axis
             foreach (Transform child in txHolder.transform)

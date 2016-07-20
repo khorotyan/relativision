@@ -4,7 +4,7 @@ using System.Collections;
 // Not yet working, To be Improved later ...
 public class ZoomConfig : MonoBehaviour
 {
-    public float orthoZoomSpeed = 0.5f; // The rate of change of the orthographic size in orthographic mode of the camera
+    public float orthoZoomSpeed = 0.1f; // The rate of change of the orthographic size in orthographic mode of the camera
 
     void Update()
     {

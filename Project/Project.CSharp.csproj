@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\CameraRotate.cs" />
     <Compile Include="Assets\Scripts\EventEdit.cs" />
     <Compile Include="Assets\Scripts\EventParallelConfig.cs" />
+    <Compile Include="Assets\Scripts\MoveScreen.cs" />
     <Compile Include="Assets\Scripts\ResetScreen.cs" />
     <Compile Include="Assets\Scripts\RotateLine.cs" />
     <Compile Include="Assets\Scripts\RotatorAddNRemove.cs" />
