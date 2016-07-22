@@ -26,7 +26,7 @@ public class ScaleObjects : MonoBehaviour {
     private List<GameObject> linesX;
     public void GetLineX()
     {
-        linesX = xt.GetListX();
+        linesX = xt.GetLinesX();
     }
 
     void Start ()

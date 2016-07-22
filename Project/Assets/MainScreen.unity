@@ -2476,7 +2476,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: v0.01.001
+  m_Text: v0.01.031
 --- !u!222 &828952132
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4673,6 +4673,14 @@ Prefab:
       propertyPath: backgroundColor
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11408286, guid: 5ab6c562fe194f64b99f428052d74ed3, type: 2}
+      propertyPath: tParallelObj
+      value: 
+      objectReference: {fileID: 197702, guid: bdf05067eab585048aba2639b29d462a, type: 2}
+    - target: {fileID: 11408286, guid: 5ab6c562fe194f64b99f428052d74ed3, type: 2}
+      propertyPath: xParallelObj
+      value: 
+      objectReference: {fileID: 197702, guid: 37f8375f85e551c41ab6c29c19dff94a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ab6c562fe194f64b99f428052d74ed3, type: 2}
   m_IsPrefabParent: 0

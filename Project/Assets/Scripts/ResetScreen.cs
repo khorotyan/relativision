@@ -26,7 +26,7 @@ public class ResetScreen : MonoBehaviour {
     private List<GameObject> linesX;
     public void GetListX()
     {
-        linesX = xt.GetListX();
+        linesX = xt.GetLinesX();
     }
     private List<GameObject> events;
     public void GetEvents() 

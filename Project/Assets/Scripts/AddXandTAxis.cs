@@ -85,11 +85,13 @@ public class AddXandTAxis : MonoBehaviour {
             GameObject tempTaxis = Instantiate(lineTObj, Vector3.zero, Quaternion.Euler(0, 0, zRotForT)) as GameObject;
             linesT.Add(tempTaxis);
             tempTaxis.transform.parent = txParent.transform;
+            tempTaxis.transform.position = new Vector3(0, 0, -0.1f);
 
             float zRotForX = 90 - zRotForT; // Contains the Z rotation of the X axis
             GameObject tempXaxis = Instantiate(lineXObj, Vector3.zero, Quaternion.Euler(0, 0, zRotForX)) as GameObject;
             linesX.Add(tempXaxis);
             tempXaxis.transform.parent = txParent.transform;
+            tempXaxis.transform.position = new Vector3(0, 0, -0.1f);
 
             txParent.transform.parent = parentsParent.transform;
 
@@ -136,7 +138,7 @@ public class AddXandTAxis : MonoBehaviour {
         return linesT;
     }
 
-    public List<GameObject> GetListX()
+    public List<GameObject> GetLinesX()
     {
         return linesX;
     }

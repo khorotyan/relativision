@@ -28,7 +28,7 @@ public class RotatorAddNRemove : MonoBehaviour {
     private List<GameObject> linesX;
     public void GetListX()
     {
-        linesX = xt.GetListX();
+        linesX = xt.GetLinesX();
     }
 
     private Renderer rendT;
@@ -91,12 +91,12 @@ public class RotatorAddNRemove : MonoBehaviour {
                 else
                     xCoord = rendT.bounds.max.x; // Returns the maximum x coordinate of the line
 
-                Vector3 tempPosT = new Vector3(xCoord * rotatorRatio, rendT.bounds.max.y * rotatorRatio, rotator.transform.position.z);
+                Vector3 tempPosT = new Vector3(xCoord * rotatorRatio, rendT.bounds.max.y * rotatorRatio, -0.05f);
 
                 Quaternion tempRotT = Quaternion.Euler(0f, 0f, linesT[i].transform.eulerAngles.z); // Rotations are in degrees 
 
                 // Draw the line with tempPosT coordinates (where tempPosT is the position of the center of the line)
-                //      and tempRotT rotation 
+                //      and tempRotT rotation
                 GameObject tempObjectT = Instantiate(rotator, tempPosT, tempRotT) as GameObject;
                 tempObjectT.transform.parent = linesT[i].transform;
                 tempObjectT.transform.localScale = new Vector3(1f / linesT[i].transform.localScale.x * cam.orthographicSize / 5f, 1f / linesT[i].transform.localScale.y * cam.orthographicSize / 5f, 0);
@@ -113,7 +113,7 @@ public class RotatorAddNRemove : MonoBehaviour {
                 else
                     yCoord = rendX.bounds.min.y;
 
-                Vector3 tempPosX = new Vector3(rendX.bounds.max.x * rotatorRatio, yCoord * rotatorRatio, rotator.transform.position.z);
+                Vector3 tempPosX = new Vector3(rendX.bounds.max.x * rotatorRatio, yCoord * rotatorRatio, -0.05f);
 
                 Quaternion tempRotX = Quaternion.Euler(0f, 0f, linesX[i].transform.eulerAngles.z);
 
