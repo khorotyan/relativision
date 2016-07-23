@@ -25,9 +25,10 @@ public class ZoomConfig : MonoBehaviour
 
             // If the camera is in the orthographic mode, orthographic mode is preferred because the application doesn't have a depth
             if (GetComponent<Camera>().orthographic == true)
-            {            
+            {
                 GetComponent<Camera>().orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed; // change the orthographic size based on the change in distance between the touches
                 GetComponent<Camera>().orthographicSize = Mathf.Max(GetComponent<Camera>().orthographicSize, 3f); // Do not allow to zoom in too much (minimum total height will be 1f * 2)
+                GetComponent<Camera>().orthographicSize = Mathf.Min(GetComponent<Camera>().orthographicSize, 50f); // Do not allow to zoom out too much
             }
         }
     }

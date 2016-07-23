@@ -64,18 +64,19 @@ public class ScaleObjects : MonoBehaviour {
         // Update T Lines
         for (int i = 0; i < linesT.Count; i++)
         {
-            linesT[i].transform.localScale = new Vector3(10f * camOrthoSize / 5, 0.03f * camOrthoSize / 5, 0f);
+            linesT[i].transform.localScale = new Vector3(50f * camOrthoSize / 5, 0.03f * camOrthoSize / 5, 0f);
         }
 
         // Update X Lines
         for (int i = 0; i < linesX.Count; i++)
         {
-            linesX[i].transform.localScale = new Vector3(10f * camOrthoSize / 5, 0.03f * camOrthoSize / 5, 0f);
+            linesX[i].transform.localScale = new Vector3(50f * camOrthoSize / 5, 0.03f * camOrthoSize / 5, 0f);
         }
 
         // Update Line Scales
         parallels = GameObject.FindGameObjectsWithTag("Parallel");
 
+        // 0.03 is the initial y scale of the Parallel line, and 5 is the initial zoom scale of the camera
         foreach (GameObject go in parallels)
             go.transform.localScale = new Vector3(go.transform.localScale.x, 0.03f * camOrthoSize / 5, 0f);
 

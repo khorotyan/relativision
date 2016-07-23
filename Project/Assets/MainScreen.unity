@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd05c765905cab4b96c702f43f24089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orthoZoomSpeed: 0.5
+  orthoZoomSpeed: 0.05
 --- !u!1 &504002317
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,7 +2476,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: v0.01.031
+  m_Text: v0.01.032
 --- !u!222 &828952132
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4681,6 +4681,10 @@ Prefab:
       propertyPath: xParallelObj
       value: 
       objectReference: {fileID: 197702, guid: 37f8375f85e551c41ab6c29c19dff94a, type: 2}
+    - target: {fileID: 11410904, guid: 5ab6c562fe194f64b99f428052d74ed3, type: 2}
+      propertyPath: rotatorRatio
+      value: 0.09
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ab6c562fe194f64b99f428052d74ed3, type: 2}
   m_IsPrefabParent: 0

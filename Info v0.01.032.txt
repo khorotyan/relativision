@@ -1,0 +1,38 @@
+Added:
+
+---
+
+Fixed (Changed):
+
+1. The scales of the T and X including the signal lines is updated and they continue to update whenever we zoom in(out)
+		Before, whenever we moved the screen, we would have seen the end of the line
+		which would make the event parallels buggy as they would not connet to any line
+2. The parallel line scales of the events sometimes did not update while zooming in(out)
+3. The user cannot zoom out too much
+
+Small Fixed (Changed):
+
+1. Zoom speed is decreased substantially
+
+Optimized: 
+
+---
+
+Issues:
+
+1. You can move the screen as much as you want (it is an issue because the user can get lost in the program)
+
+What's Next: 
+
+1. I will prevent the user from moving the screen endlessly
+
+2. Lines will have a constant length only its thinkness will be changed whenever we zoom in or out (CANCELED)
+		The Feature was canceled due to optimization problems
+		I added the Feature and then shortly after removed it because of the fact that this feature made 2 times more calculations 
+		than the fix I added instead. 
+		
+		Lets discuss why this feature multiplied the number of calculations.
+		If we would have given a constant length to the T and X lines, that would have made us to update both the position and the 
+		length of the Rotator object whenever zooming in and out, and it would do the same calculation whenever we enable the edit mode.
+		Instead the scale(length) of the lines are updated at the time the they are drawn and they are updated whenever there are 2 touches
+		on the screen (zooming in and out)
