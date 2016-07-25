@@ -20,7 +20,7 @@ public class ScaleObjects : MonoBehaviour {
     private List<GameObject> linesT;
     public void GetLineT()
     {
-        linesT = xt.GetListT();
+        linesT = xt.GetLinesT();
     }
 
     private List<GameObject> linesX;

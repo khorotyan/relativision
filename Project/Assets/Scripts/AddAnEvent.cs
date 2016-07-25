@@ -6,6 +6,7 @@ public class AddAnEvent : MonoBehaviour {
 
     public GameObject eventObject;
     public GameObject eventParent;
+    public GameObject lineText;
     public ScaleObjects so;
     public AddXandTAxis xt;
     [SerializeField]
@@ -20,13 +21,14 @@ public class AddAnEvent : MonoBehaviour {
 
     private Color32 defAddEventButtonCol;
 
+    private float textScale = 5f;
     private bool mouseDown = false;
     public static bool canAddEvents = false;
 
     private List<GameObject> linesT;
     public void GetListT() 
     {
-        linesT = xt.GetListT();
+        linesT = xt.GetLinesT();
     }
 
     void Awake ()
@@ -58,32 +60,48 @@ public class AddAnEvent : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0)) 
         {
+            
             hitCollider = Physics2D.OverlapPoint(mousePos); // Returns the collider that the mouse collides with
 
             if (hitCollider) // If the mouse collides with something
             {
-                if (hitCollider.transform.tag == "Screen") // If the something is the screen
-                {
+                if (hitCollider.transform.tag == "Screen" || hitCollider.transform.tag == "TXLine" || hitCollider.transform.tag == "Event")
+                {                   
                     mouseDown = true;
                 }
             }
         }
-
+        
         if (mouseDown == true)
         {
             if (Input.GetMouseButtonUp(0))
             {
                 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Returns the world point of the mouse
 
-                GameObject tempEvent = Instantiate(eventObject, new Vector3(mousePos.x, mousePos.y, -0.05f), Quaternion.identity) as GameObject; // Spawn the event
+                GameObject tempEvent = Instantiate(eventObject, new Vector3(mousePos.x, mousePos.y, -0.5f), Quaternion.identity) as GameObject; // Spawn the event
                 events.Add(tempEvent); 
                 tempEvent.transform.parent = eventParent.transform; // Sets the parent of the event
 
                 mouseDown = false;
 
                 so.BackgroundScaleConfig();
+
+                AddEventNames(tempEvent);
             } 
         }
+    }
+
+    void AddEventNames(GameObject theEvent)
+    {
+        // Configures the T line name
+        lineText.GetComponent<TextMesh>().text = "E - " + events.Count;
+
+        Vector3 textPos = new Vector3(theEvent.transform.position.x, theEvent.transform.position.y + 0.1f, theEvent.transform.position.z);
+
+        GameObject eventText = Instantiate(lineText, textPos, Quaternion.identity) as GameObject;
+        eventText.transform.parent = theEvent.transform;
+        eventText.transform.localScale = new Vector3(textScale / theEvent.transform.localScale.x, textScale / theEvent.transform.localScale.y, 1f);
+
     }
 
     public void EventConfig()

@@ -21,7 +21,7 @@ public class ResetScreen : MonoBehaviour {
     private List<GameObject> linesT; 
     public void GetListT() 
     {
-        linesT = xt.GetListT();
+        linesT = xt.GetLinesT();
     }
     private List<GameObject> linesX;
     public void GetListX()
@@ -36,7 +36,7 @@ public class ResetScreen : MonoBehaviour {
 
     void Start ()
     {
-	
+        
 	}
 	
 	void Update ()

@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &107518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 485844}
+  - 114: {fileID: 11476958}
+  m_Layer: 0
+  m_Name: NameChanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &108556
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,8 +140,22 @@ Transform:
   - {fileID: 411502}
   - {fileID: 401526}
   - {fileID: 418830}
+  - {fileID: 485844}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &485844
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 485016}
+  m_RootOrder: 3
 --- !u!114 &11408286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,10 +168,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallelsParent: {fileID: 0}
-  xParallel: {fileID: 197702, guid: 37f8375f85e551c41ab6c29c19dff94a, type: 2}
-  tParallel: {fileID: 197702, guid: bdf05067eab585048aba2639b29d462a, type: 2}
+  xParallelObj: {fileID: 197702, guid: 37f8375f85e551c41ab6c29c19dff94a, type: 2}
+  tParallelObj: {fileID: 197702, guid: bdf05067eab585048aba2639b29d462a, type: 2}
   xt: {fileID: 11442806}
   aae: {fileID: 11432238}
+  tParallels: []
+  xParallels: []
 --- !u!114 &11410904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,7 +190,7 @@ MonoBehaviour:
   xt: {fileID: 11442806}
   so: {fileID: 11489442}
   editButton: {fileID: 0}
-  rotatorRatio: 0.5
+  rotatorRatio: 0.09
   linesT: []
   linesX: []
 --- !u!114 &11413854
@@ -192,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventObject: {fileID: 183486, guid: 71af81b5408a93746b54e5cfe163a5e1, type: 2}
   eventParent: {fileID: 0}
+  lineText: {fileID: 114440, guid: d041afecdf8500f49b001a33290c5910, type: 2}
   so: {fileID: 11489442}
   xt: {fileID: 11442806}
   events: []
@@ -213,10 +246,12 @@ MonoBehaviour:
   signalLineParent: {fileID: 0}
   lineTObj: {fileID: 197702, guid: 24bc3f6dfad5de04a93279edb1484e91, type: 2}
   lineXObj: {fileID: 197702, guid: 49638b9e70f8d9449990cca87743fc82, type: 2}
+  lineText: {fileID: 114440, guid: d041afecdf8500f49b001a33290c5910, type: 2}
   parentsParent: {fileID: 0}
   bestPlaceToInsert: 0
   biggestGapBetweenLines: 0
   angleOfBestPlaceToInsert: 0
+  textPlaceRatio: 0.07
   issueText: {fileID: 0}
   sl1: {fileID: 0}
   sl2: {fileID: 0}
@@ -270,6 +305,23 @@ MonoBehaviour:
   moveIcon: {fileID: 143754, guid: f79a85e7bb7115244aedfa34b525ad30, type: 2}
   issueText: {fileID: 0}
   aae: {fileID: 11432238}
+--- !u!114 &11476958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567ec09c9c5e9ad448362d30d30d437d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xt: {fileID: 11442806}
+  aae: {fileID: 11432238}
+  newNameOfButton: {fileID: 0}
+  deleteButton: {fileID: 0}
+  componentEditor: {fileID: 0}
+  componentEditorActive: 0
 --- !u!114 &11479656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -285,7 +337,6 @@ MonoBehaviour:
   rText: {fileID: 0}
   gText: {fileID: 0}
   bText: {fileID: 0}
-  aText: {fileID: 0}
 --- !u!114 &11489442
 MonoBehaviour:
   m_ObjectHideFlags: 1

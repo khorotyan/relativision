@@ -6,9 +6,11 @@ TagManager:
   tags:
   - Rotator
   - Screen
-  - Mover
+  - EventMover
   - Event
   - Parallel
+  - LineText
+  - TXLine
   layers:
   - Default
   - TransparentFX

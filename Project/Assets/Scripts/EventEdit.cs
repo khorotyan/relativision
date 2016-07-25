@@ -74,7 +74,7 @@ public class EventEdit : MonoBehaviour {
             {
                 GameObject tempEventMover = Instantiate(moveIcon, events[i].transform.position, Quaternion.identity) as GameObject;       
                 tempEventMover.transform.parent = events[i].transform;
-                tempEventMover.transform.localScale = new Vector3(1f, 1f, 0);
+                tempEventMover.transform.localScale = new Vector3(1.4f, 1.4f, 0);
             }
         }
     }
@@ -86,7 +86,7 @@ public class EventEdit : MonoBehaviour {
         {
             for (int i = 0; i < events.Count; i++)
             {
-                Destroy(events[i].transform.GetChild(0).gameObject);
+                Destroy(events[i].transform.FindChild("moveIcon(Clone)").gameObject);
             }
         }
     }
@@ -99,7 +99,7 @@ public class EventEdit : MonoBehaviour {
 
         if (hitCollider) 
         {
-            if (hitCollider.transform.tag == "Mover") 
+            if (hitCollider.transform.tag == "EventMover") 
             {
                 mouseDown = true;
             }

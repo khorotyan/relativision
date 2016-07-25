@@ -13,6 +13,7 @@ public class MoveScreen : MonoBehaviour {
     private Color32 defMoveScreenCol;
     private Color32 editorModeColor;
 
+    private float moveRestrictLen = 100f;
     private bool canMoveTheScreen = false;
     private bool escapedFrame = false;
     private bool firstTouch = true;
@@ -43,6 +44,8 @@ public class MoveScreen : MonoBehaviour {
             moveScreenButton.image.color = defMoveScreenCol;
             canMoveTheScreen = false;
         }
+
+        MoveRestriction();
 	}
 
     // Moves the screen by draging the finger or mouse 
@@ -75,6 +78,21 @@ public class MoveScreen : MonoBehaviour {
             }
             
         }      
+    }
+
+    void MoveRestriction()
+    {
+        Vector3 camPos = Camera.main.transform.position;
+
+        if (camPos.x > moveRestrictLen)
+            Camera.main.transform.position = new Vector3(moveRestrictLen, camPos.y, camPos.z);
+        else if (camPos.x < -moveRestrictLen)
+            Camera.main.transform.position = new Vector3(-moveRestrictLen, camPos.y, camPos.z);
+
+        if (camPos.y > moveRestrictLen)
+            Camera.main.transform.position = new Vector3(camPos.x, moveRestrictLen, camPos.z);
+        else if (camPos.y < -moveRestrictLen)
+            Camera.main.transform.position = new Vector3(camPos.x, -moveRestrictLen, camPos.z);
     }
 
     // Enables and disables the ability to move the screen

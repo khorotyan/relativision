@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\AddXandTAxis.cs" />
     <Compile Include="Assets\Scripts\CameraRotate.cs" />
     <Compile Include="Assets\Scripts\ColorController.cs" />
+    <Compile Include="Assets\Scripts\ComponentEditor.cs" />
     <Compile Include="Assets\Scripts\EventEdit.cs" />
     <Compile Include="Assets\Scripts\EventParallelConfig.cs" />
     <Compile Include="Assets\Scripts\MoveScreen.cs" />

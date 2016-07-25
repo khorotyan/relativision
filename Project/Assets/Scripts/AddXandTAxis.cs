@@ -14,6 +14,7 @@ public class AddXandTAxis : MonoBehaviour {
     [Space(5)]
     public GameObject lineTObj;
     public GameObject lineXObj;
+    public GameObject lineText;
     public GameObject parentsParent;
     public static List<GameObject> linesT; // Stores GameObjects of the T lines also the signal lines
 
@@ -23,12 +24,15 @@ public class AddXandTAxis : MonoBehaviour {
     public int bestPlaceToInsert; // Determines the position of the list after which the new T axis will be added;
     public float biggestGapBetweenLines = 0; // Stores the biggest gap between the T axis
     public float angleOfBestPlaceToInsert; // Stores the angle of the line after which the newest line will be inserted
+    public float textPlaceRatio = 0.09f;
     public Text issueText;
 
     [HideInInspector]
     public GameObject sl1;
     [HideInInspector]
     public GameObject sl2;
+
+    private float textScale = 5f;
     private bool timeWaited = false;
     #endregion
 
@@ -62,11 +66,11 @@ public class AddXandTAxis : MonoBehaviour {
 
     // Decides where to place the new T axis based on the previously placed lines
     //      and calculates where to place the X axis
-    void LineCheck()
+    void LineCheckNAdd()
     {
         if (linesT.Count != 0 || linesT != null)
         {
-            // Calculates the gap between consequtive lines to see where the best place is to draw a new line
+            // Calculates the gap between consecutive lines to see where the best place to draw a new line is
             for (int i = linesT.Count - 1; i > 0; i--)
             {
                 if (linesT[i].transform.eulerAngles.z - linesT[i - 1].transform.eulerAngles.z > biggestGapBetweenLines)
@@ -91,21 +95,61 @@ public class AddXandTAxis : MonoBehaviour {
             GameObject tempXaxis = Instantiate(lineXObj, Vector3.zero, Quaternion.Euler(0, 0, zRotForX)) as GameObject;
             linesX.Add(tempXaxis);
             tempXaxis.transform.parent = txParent.transform;
-            tempXaxis.transform.position = new Vector3(0, 0, -0.1f);
+            tempXaxis.transform.position = new Vector3(0, 0, -0.1f);  
 
             txParent.transform.parent = parentsParent.transform;
 
             so.BackgroundScaleConfig();
+
+            AddLineNames(tempTaxis ,tempXaxis);
         }
+    }
+
+    // Adds the line names of the specified axis
+    void AddLineNames(GameObject tAxis, GameObject xAxis)
+    {
+        // Configures the T line name
+        lineText.GetComponent<TextMesh>().text = "T - " + linesX.Count;
+
+        Renderer rendT = tAxis.GetComponent<Renderer>();
+
+        float xCoord;
+        if (tAxis.transform.eulerAngles.z >= 90)
+            xCoord = rendT.bounds.min.x; // Returns the minimum x coordinate of the line (the boundary of the line)
+        else
+            xCoord = rendT.bounds.max.x; // Returns the maximum x coordinate of the line
+
+        Vector3 tempPosOfT = new Vector3(xCoord * textPlaceRatio, rendT.bounds.max.y * textPlaceRatio, -0.2f);
+
+        GameObject tText = Instantiate(lineText, tempPosOfT, tAxis.transform.rotation) as GameObject;
+        tText.transform.parent = tAxis.transform;
+        tText.transform.localScale = new Vector3(textScale / tAxis.transform.localScale.x, textScale / tAxis.transform.localScale.y, 1f);
+
+        // Configures the X line name
+        lineText.GetComponent<TextMesh>().text = "X - " + linesX.Count;
+
+        Renderer rendX = xAxis.GetComponent<Renderer>();
+
+        float yCoord;
+        if (xAxis.transform.eulerAngles.z >= 0 && xAxis.transform.eulerAngles.z <= 45)
+            yCoord = rendX.bounds.max.y;
+        else
+            yCoord = rendX.bounds.min.y;
+
+        Vector3 tempPosOfX = new Vector3(rendX.bounds.max.x * textPlaceRatio, yCoord * textPlaceRatio, -0.2f);
+
+        GameObject xText = Instantiate(lineText, tempPosOfX, xAxis.transform.rotation) as GameObject;
+        xText.transform.parent = xAxis.transform;
+        xText.transform.localScale = new Vector3(textScale / xAxis.transform.localScale.x, textScale / xAxis.transform.localScale.y, 1f);
     }
 
     public void AddLine()
     {
         if (RotatorAddNRemove.inEditorMode == false)
         {
-            linesT = linesT.OrderBy(temp => temp.transform.eulerAngles.z).ToList<GameObject>(); // Sorts the list depending on the z angle of the line
-            LineCheck();
-            linesT = linesT.OrderBy(temp => temp.transform.eulerAngles.z).ToList<GameObject>(); // Sorts the list depending on the z angle of the line
+            linesT = linesT.OrderBy(temp => temp.transform.eulerAngles.z).ToList(); // Sorts the list depending on the z angle of the line
+            LineCheckNAdd();
+            linesT = linesT.OrderBy(temp => temp.transform.eulerAngles.z).ToList(); // Sorts the list depending on the z angle of the line
             biggestGapBetweenLines = 0; // Needs to be recalculated every time we draw a new line
         }
         else
@@ -133,7 +177,7 @@ public class AddXandTAxis : MonoBehaviour {
     }
 
     // Returns the GameObjects to make them accessible to the other classes
-    public List<GameObject> GetListT()
+    public List<GameObject> GetLinesT()
     {
         return linesT;
     }

@@ -35,7 +35,9 @@ public class ColorController : MonoBehaviour {
     // If the inputed values are valid, set the universal edit mode colors to the given RGBA color
     public void SetEditorColor()
     {
-        if ((Int16.Parse(rText.text) >= 0 && Int16.Parse(rText.text) <= 255) && (Int16.Parse(gText.text) >= 0 && Int16.Parse(gText.text) <= 255) && 
+        int n;
+        if (int.TryParse(rText.text, out n) && int.TryParse(gText.text, out n) && int.TryParse(bText.text, out n) && 
+            (Int16.Parse(rText.text) >= 0 && Int16.Parse(rText.text) <= 255) && (Int16.Parse(gText.text) >= 0 && Int16.Parse(gText.text) <= 255) && 
             (Int16.Parse(bText.text) >= 0 && Int16.Parse(bText.text) <= 255) && rText.text.Length != 0 && gText.text.Length != 0 && bText.text.Length != 0)
         {
             sharedEditorColor = new Color32(Byte.Parse(rText.text), Byte.Parse(gText.text), Byte.Parse(bText.text), 255);

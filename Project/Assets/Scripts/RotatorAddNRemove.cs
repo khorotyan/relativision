@@ -22,7 +22,7 @@ public class RotatorAddNRemove : MonoBehaviour {
     private List<GameObject> linesT; // Stores the objects of the Taxis in the list
     public void GetListT() // Gets the T axis from the AddXandTAxis class
     {
-        linesT = xt.GetListT();
+        linesT = xt.GetLinesT();
     }
     [SerializeField]
     private List<GameObject> linesX;
@@ -91,13 +91,13 @@ public class RotatorAddNRemove : MonoBehaviour {
                 else
                     xCoord = rendT.bounds.max.x; // Returns the maximum x coordinate of the line
 
-                Vector3 tempPosT = new Vector3(xCoord * rotatorRatio, rendT.bounds.max.y * rotatorRatio, -0.05f);
+                Vector3 tempPosOfT = new Vector3(xCoord * rotatorRatio, rendT.bounds.max.y * rotatorRatio, -0.05f);
 
                 Quaternion tempRotT = Quaternion.Euler(0f, 0f, linesT[i].transform.eulerAngles.z); // Rotations are in degrees 
 
                 // Draw the line with tempPosT coordinates (where tempPosT is the position of the center of the line)
                 //      and tempRotT rotation
-                GameObject tempObjectT = Instantiate(rotator, tempPosT, tempRotT) as GameObject;
+                GameObject tempObjectT = Instantiate(rotator, tempPosOfT, tempRotT) as GameObject;
                 tempObjectT.transform.parent = linesT[i].transform;
                 tempObjectT.transform.localScale = new Vector3(1f / linesT[i].transform.localScale.x * cam.orthographicSize / 5f, 1f / linesT[i].transform.localScale.y * cam.orthographicSize / 5f, 0);
             }
@@ -113,11 +113,11 @@ public class RotatorAddNRemove : MonoBehaviour {
                 else
                     yCoord = rendX.bounds.min.y;
 
-                Vector3 tempPosX = new Vector3(rendX.bounds.max.x * rotatorRatio, yCoord * rotatorRatio, -0.05f);
+                Vector3 tempPosOfX = new Vector3(rendX.bounds.max.x * rotatorRatio, yCoord * rotatorRatio, -0.05f);
 
                 Quaternion tempRotX = Quaternion.Euler(0f, 0f, linesX[i].transform.eulerAngles.z);
 
-                GameObject tempObjectX = Instantiate(rotator, tempPosX, tempRotX) as GameObject;
+                GameObject tempObjectX = Instantiate(rotator, tempPosOfX, tempRotX) as GameObject;
                 tempObjectX.transform.parent = linesX[i].transform;
                 tempObjectX.transform.localScale = new Vector3(1f / linesX[i].transform.localScale.x * cam.orthographicSize / 5f, 1f / linesX[i].transform.localScale.y * cam.orthographicSize / 5f, 0);
             }
