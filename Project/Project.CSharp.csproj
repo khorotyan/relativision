@@ -61,11 +61,11 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="MoodkieSecurity">
-      <HintPath>Assets\Plugins\MoodkieSecurity.dll</HintPath>
-    </Reference>
     <Reference Include="ES2">
       <HintPath>Assets\Plugins\ES2.dll</HintPath>
+    </Reference>
+    <Reference Include="MoodkieSecurity">
+      <HintPath>Assets\Plugins\MoodkieSecurity.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\EventEdit.cs" />
     <Compile Include="Assets\Scripts\EventParallelConfig.cs" />
     <Compile Include="Assets\Scripts\LoadManager.cs" />
+    <Compile Include="Assets\Scripts\LoadObjectContainer.cs" />
     <Compile Include="Assets\Scripts\MoveScreen.cs" />
     <Compile Include="Assets\Scripts\ResetScreen.cs" />
     <Compile Include="Assets\Scripts\RotateLine.cs" />

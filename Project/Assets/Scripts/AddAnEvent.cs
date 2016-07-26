@@ -10,7 +10,7 @@ public class AddAnEvent : MonoBehaviour {
     public ScaleObjects so;
     public AddXandTAxis xt;
     [SerializeField]
-    public List<GameObject> events; // Stores GameObjects of the events
+    public static List<GameObject> events; // Stores GameObjects of the events
     [Space(5)]
     public Button addEventButton;
 

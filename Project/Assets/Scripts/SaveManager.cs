@@ -1,15 +1,45 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
-public class SaveManager : MonoBehaviour {
+public class SaveManager : MonoBehaviour
+{
+    public AddAnEvent aae;
 
-	// Use this for initialization
-	void Start () {
-	
+    private List<GameObject> events;
+    public void GetEvents()
+    {
+        events = aae.GetTheEvents();
+    }
+
+    void Start ()
+    {
+	    
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 	
 	}
+
+    public void Save ()
+    {
+        SaveEvents();
+    }
+
+    void SaveEvents()
+    {
+        GetEvents();
+
+        List<Transform> eventTransforms = new List<Transform>();
+        List<string> eventNames = new List<string>();
+
+        foreach (GameObject g in events)
+        {
+            eventTransforms.Add(g.transform);
+            eventNames.Add(g.transform.FindChild("LineText(Clone)").gameObject.GetComponent<TextMesh>().text);
+        }
+
+        ES2.Save(eventTransforms, "eventGameObjects.txt?tag=eventTransforms");
+        ES2.Save(eventNames, "eventGameObjects.txt?tag=eventNames");
+    }
 }

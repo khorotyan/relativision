@@ -5,6 +5,7 @@ using System.Collections;
 
 public class SceneManagement : MonoBehaviour
 {
+    public SaveManager saveObj;
     public GameObject projectsCanvas;
     public GameObject projectContainer;
     public GameObject projectContainerParent;
@@ -35,5 +36,7 @@ public class SceneManagement : MonoBehaviour
         paintScreenObjects[0].SetActive(false);
         paintScreenObjects[1].SetActive(false);
         projectsCanvas.SetActive(true);
+
+        saveObj.Save();
     }
 }
