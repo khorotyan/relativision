@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class LoadManager : MonoBehaviour
 {
+    public static int lastID = -1;
+    public int ownID;
+
     // Events
     private GameObject eventsPicture;
     private GameObject eventsParent;
@@ -26,6 +29,9 @@ public class LoadManager : MonoBehaviour
 
     void Start ()
     {
+        lastID++;
+        ownID = lastID;
+
         // Finds the objects with their names
         projectsCanvas = GameObject.Find("LoadProjectCanvas");
         manager = GameObject.Find("Main Camera");
@@ -64,6 +70,8 @@ public class LoadManager : MonoBehaviour
         paintScreenObjects[1].SetActive(true);
         loadButton.transform.SetSiblingIndex(0);
 
+        SaveManager.currentProjID = ownID; // Set the id of the last entered project
+
         Load();   
     }
 
@@ -78,13 +86,13 @@ public class LoadManager : MonoBehaviour
     // If the events loader file exists, load the events with their names
     void LoadEvents()
     {
-        if (ES2.Exists("eventGameObjects.txt?tag=eventTransforms") && ES2.Exists("eventGameObjects.txt?tag=eventNames"))
+        if (ES2.Exists("eventGameObjects.txt?tag=eventTransforms" + SaveManager.currentProjID) && ES2.Exists("eventGameObjects.txt?tag=eventNames" + SaveManager.currentProjID))
         {
             List<Transform> eventTransforms = new List<Transform>();
-            eventTransforms = ES2.LoadList<Transform>("eventGameObjects.txt?tag=eventTransforms");
+            eventTransforms = ES2.LoadList<Transform>("eventGameObjects.txt?tag=eventTransforms" + SaveManager.currentProjID);
 
             List<string> eventTexts = new List<string>();
-            eventTexts = ES2.LoadList<string>("eventGameObjects.txt?tag=eventNames");
+            eventTexts = ES2.LoadList<string>("eventGameObjects.txt?tag=eventNames" + SaveManager.currentProjID);
 
             for (int i = 0; i < eventTransforms.Count; i++)
             {               
@@ -106,20 +114,20 @@ public class LoadManager : MonoBehaviour
     // Load the T and X lines with their names
     void LoadTXLines()
     {
-        if (ES2.Exists("tLineGameObjects.txt?tag=tLineNames") && ES2.Exists("xLineGameObjects.txt?tag=xLineNames") && ES2.Exists("xLineGameObjects.txt?tag=xLineNames")
-             && ES2.Exists("tLineGameObjects.txt?tag=tLineNameTransforms") && ES2.Exists("xLineGameObjects.txt?tag=xLineNameTransforms"))
+        if (ES2.Exists("tLineGameObjects.txt?tag=tLineNames" + SaveManager.currentProjID) && ES2.Exists("xLineGameObjects.txt?tag=xLineNames" + SaveManager.currentProjID) && ES2.Exists("xLineGameObjects.txt?tag=xLineNames" + SaveManager.currentProjID)
+             && ES2.Exists("tLineGameObjects.txt?tag=tLineNameTransforms" + SaveManager.currentProjID) && ES2.Exists("xLineGameObjects.txt?tag=xLineNameTransforms" + SaveManager.currentProjID))
         {        
             List<string> tLineTexts = new List<string>();
-            tLineTexts = ES2.LoadList<string>("tLineGameObjects.txt?tag=tLineNames");
+            tLineTexts = ES2.LoadList<string>("tLineGameObjects.txt?tag=tLineNames" + SaveManager.currentProjID);
             List<Transform> tNameTransforms = new List<Transform>();
-            tNameTransforms = ES2.LoadList<Transform>("tLineGameObjects.txt?tag=tLineNameTransforms");
+            tNameTransforms = ES2.LoadList<Transform>("tLineGameObjects.txt?tag=tLineNameTransforms" + SaveManager.currentProjID);
 
             List<Transform> xLineTransforms = new List<Transform>();
-            xLineTransforms = ES2.LoadList<Transform>("xLineGameObjects.txt?tag=xLineTransforms");
+            xLineTransforms = ES2.LoadList<Transform>("xLineGameObjects.txt?tag=xLineTransforms" + SaveManager.currentProjID);
             List<string> xLineTexts = new List<string>();
-            xLineTexts = ES2.LoadList<string>("xLineGameObjects.txt?tag=xLineNames");
+            xLineTexts = ES2.LoadList<string>("xLineGameObjects.txt?tag=xLineNames" + SaveManager.currentProjID);
             List<Transform> xNameTransforms = new List<Transform>();
-            xNameTransforms = ES2.LoadList<Transform>("xLineGameObjects.txt?tag=xLineNameTransforms");
+            xNameTransforms = ES2.LoadList<Transform>("xLineGameObjects.txt?tag=xLineNameTransforms" + SaveManager.currentProjID);
 
             for (int i = 0; i < xLineTransforms.Count; i++)
             {
@@ -161,13 +169,12 @@ public class LoadManager : MonoBehaviour
     {
         bool parallelsAdded = false;
         //ES2.Save(parallelDrawn, "parallelInfo.txt?tag=parStatus");
-        if (ES2.Exists("parallelInfo.txt?tag=parStatus"))
+        if (ES2.Exists("parallelInfo.txt?tag=parStatus" + SaveManager.currentProjID))
         {
-            parallelsAdded = ES2.Load<bool>("parallelInfo.txt?tag=parStatus");
+            parallelsAdded = ES2.Load<bool>("parallelInfo.txt?tag=parStatus" + SaveManager.currentProjID);
 
             if (parallelsAdded == true)
             {
-                Debug.Log(1);
                 epc.DrawParallels();
             }
         }
@@ -176,12 +183,12 @@ public class LoadManager : MonoBehaviour
     // Load Camera Position and its zoom info 
     void LoadCameraInfo()
     {
-        if (ES2.Exists("camera.txt?tag=camTransform") && ES2.Exists("camera.txt?tag=camZoomInfo"))
+        if (ES2.Exists("camera.txt?tag=camTransform" + SaveManager.currentProjID) && ES2.Exists("camera.txt?tag=camZoomInfo" + SaveManager.currentProjID))
         { 
-            Camera.main.transform.position = ES2.Load<Transform>("camera.txt?tag=camTransform").position;
-            Camera.main.transform.rotation = ES2.Load<Transform>("camera.txt?tag=camTransform").rotation;
+            Camera.main.transform.position = ES2.Load<Transform>("camera.txt?tag=camTransform" + SaveManager.currentProjID).position;
+            Camera.main.transform.rotation = ES2.Load<Transform>("camera.txt?tag=camTransform" + SaveManager.currentProjID).rotation;
 
-            Camera.main.orthographicSize = ES2.Load<float>("camera.txt?tag=camZoomInfo");
+            Camera.main.orthographicSize = ES2.Load<float>("camera.txt?tag=camZoomInfo" + SaveManager.currentProjID);
         }
     }
 

@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class SaveManager : MonoBehaviour
 {
     public AddAnEvent aae;
     public AddXandTAxis xt;
+
+    public GameObject projectsParent;
+    public GameObject projectObject;
+
+    public static int currentProjID;
 
     private List<GameObject> events;
     public void GetEvents()
@@ -53,8 +59,8 @@ public class SaveManager : MonoBehaviour
             eventNames.Add(g.transform.FindChild("LineText(Clone)").gameObject.GetComponent<TextMesh>().text);
         }
 
-        ES2.Save(eventTransforms, "eventGameObjects.txt?tag=eventTransforms");
-        ES2.Save(eventNames, "eventGameObjects.txt?tag=eventNames");
+        ES2.Save(eventTransforms, "eventGameObjects.txt?tag=eventTransforms" + currentProjID);
+        ES2.Save(eventNames, "eventGameObjects.txt?tag=eventNames" + currentProjID);
     }
 
     void SaveTXLines()
@@ -78,12 +84,12 @@ public class SaveManager : MonoBehaviour
             tNameTransforms.Add(g.transform.parent.FindChild("TLine(Clone)").transform.FindChild("LineText(Clone)").transform);
         }
 
-        ES2.Save(tNames, "tLineGameObjects.txt?tag=tLineNames");
-        ES2.Save(tNameTransforms, "tLineGameObjects.txt?tag=tLineNameTransforms");
+        ES2.Save(tNames, "tLineGameObjects.txt?tag=tLineNames" + currentProjID);
+        ES2.Save(tNameTransforms, "tLineGameObjects.txt?tag=tLineNameTransforms" + currentProjID);
 
-        ES2.Save(xTransforms, "xLineGameObjects.txt?tag=xLineTransforms");
-        ES2.Save(xNames, "xLineGameObjects.txt?tag=xLineNames");
-        ES2.Save(xNameTransforms, "xLineGameObjects.txt?tag=xLineNameTransforms");
+        ES2.Save(xTransforms, "xLineGameObjects.txt?tag=xLineTransforms" + currentProjID);
+        ES2.Save(xNames, "xLineGameObjects.txt?tag=xLineNames" + currentProjID);
+        ES2.Save(xNameTransforms, "xLineGameObjects.txt?tag=xLineNameTransforms" + currentProjID);
     }
 
     void SaveCamInfo()
@@ -91,14 +97,63 @@ public class SaveManager : MonoBehaviour
         Transform camTransform = Camera.main.transform;
         float camZoomInfo = Camera.main.orthographicSize;
 
-        ES2.Save(camTransform, "camera.txt?tag=camTransform");
-        ES2.Save(camZoomInfo, "camera.txt?tag=camZoomInfo");
+        ES2.Save(camTransform, "camera.txt?tag=camTransform" + currentProjID);
+        ES2.Save(camZoomInfo, "camera.txt?tag=camZoomInfo" + currentProjID);
     }
 
     void SaveParallelStatus()
     {
         bool parallelDrawn = EventParallelConfig.parallelsAdded;
 
-        ES2.Save(parallelDrawn, "parallelInfo.txt?tag=parStatus");
+        ES2.Save(parallelDrawn, "parallelInfo.txt?tag=parStatus" + currentProjID);
+    }
+
+    public void SaveProjectsIdsNNames()
+    {
+        int id = LoadManager.lastID; // Gets the last id
+        List<int> ids = new List<int>();
+        List<string> projectNames = new List<string>();
+
+        int numberOfProjects = projectsParent.transform.childCount;
+
+        for (int i = 0; i < numberOfProjects; i++)
+        {
+            ids.Add(projectsParent.transform.GetChild(i).transform.GetComponent<LoadManager>().ownID);
+            projectNames.Add(projectsParent.transform.GetChild(i).transform.FindChild("InputField").FindChild("Placeholder").GetComponent<Text>().text);
+        }
+
+        ES2.Save(id, "projects.txt?tag=lastID" + currentProjID);
+        ES2.Save(ids, "projects.txt?tag=ids" + currentProjID);
+        ES2.Save(projectNames, "projects.txt?tag=projectNames" + currentProjID);
+    }
+
+    // Load the project objects that will be used to open a saved project
+    public void LoadProjectsIdsNNames()
+    {
+        if (ES2.Exists("projects.txt?tag=lastID" + currentProjID) && ES2.Exists("projects.txt?tag=ids" + currentProjID) && ES2.Exists("projects.txt?tag=projectNames" + currentProjID))
+        {
+            LoadManager.lastID = ES2.Load<int>("projects.txt?tag=lastID" + currentProjID);
+
+            List<int> ids = new List<int>();
+            List<string> projectNames = new List<string>();
+
+            ids = ES2.LoadList<int>("projects.txt?tag=ids" + currentProjID);
+            projectNames = ES2.LoadList<string>("projects.txt?tag=projectNames" + currentProjID);
+
+            for (int i = 0; i < ids.Count; i++)
+            {
+                GameObject tempProject = Instantiate(projectObject);
+                tempProject.transform.SetParent(projectsParent.transform);
+                tempProject.transform.localScale = new Vector3(1f, 1f, 1f);
+                tempProject.GetComponent<LoadManager>().ownID = ids[i];
+                tempProject.transform.FindChild("InputField").FindChild("Placeholder").GetComponent<Text>().text = projectNames[i];
+                
+                if (projectNames[i].Length == 0)
+                {
+                    tempProject.transform.FindChild("InputField").FindChild("Placeholder").GetComponent<Text>().text = "Empty Project";
+                }
+               
+            }
+        }
     }
 }

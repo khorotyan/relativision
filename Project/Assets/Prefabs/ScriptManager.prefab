@@ -301,6 +301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aae: {fileID: 11432238}
+  xt: {fileID: 11442806}
+  projectsParent: {fileID: 0}
 --- !u!114 &11442806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,8 +375,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d630a196092934ca67ac0abc0602e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventsPicture: {fileID: 0}
+  eventsObject: {fileID: 183486, guid: 71af81b5408a93746b54e5cfe163a5e1, type: 2}
   eventsParent: {fileID: 0}
+  nameObject: {fileID: 114440, guid: d041afecdf8500f49b001a33290c5910, type: 2}
+  tLineObject: {fileID: 197702, guid: 24bc3f6dfad5de04a93279edb1484e91, type: 2}
+  xLineObject: {fileID: 197702, guid: 49638b9e70f8d9449990cca87743fc82, type: 2}
+  txParentsParent: {fileID: 0}
+  epc: {fileID: 11408286}
+  projectsParent: {fileID: 0}
+  projectObject: {fileID: 106280, guid: f21171c9804f6054abf67c6fb7e3e40a, type: 2}
 --- !u!114 &11466678
 MonoBehaviour:
   m_ObjectHideFlags: 1

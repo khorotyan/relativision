@@ -14,4 +14,8 @@ public class LoadObjectContainer : MonoBehaviour
 
     // Parallel Info
     public EventParallelConfig epc;
+
+    // Projects 
+    public GameObject projectsParent;
+    public GameObject projectObject;
 }

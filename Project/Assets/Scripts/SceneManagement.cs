@@ -13,7 +13,7 @@ public class SceneManagement : MonoBehaviour
 
     void Start ()
     {
-	
+        saveObj.LoadProjectsIdsNNames();
 	}
 	
 	void Update ()
@@ -38,5 +38,6 @@ public class SceneManagement : MonoBehaviour
         projectsCanvas.SetActive(true);
 
         saveObj.Save();
+        saveObj.SaveProjectsIdsNNames();
     }
 }
