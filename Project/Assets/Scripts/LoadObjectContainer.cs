@@ -3,7 +3,15 @@
 public class LoadObjectContainer : MonoBehaviour
 {
     // Events
-    public GameObject eventsPicture;
+    public GameObject eventsObject;
     public GameObject eventsParent;
-    public GameObject eventsName;
+    public GameObject nameObject;
+
+    // Lines 
+    public GameObject tLineObject;
+    public GameObject xLineObject;
+    public GameObject txParentsParent;
+
+    // Parallel Info
+    public EventParallelConfig epc;
 }
